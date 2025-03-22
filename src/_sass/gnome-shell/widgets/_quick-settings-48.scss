@@ -89,40 +89,32 @@ $toggle-height: $space-size * 4 + $margin-size + $base-icon-size;
   }
 
   .quick-toggle-menu-button {
-    background-color: $secondary-fill !important;
+    $toggle-bg: rgba($text, 0.06);
+
+    background-color: alpha-composite($toggle-bg, $secondary-fill) !important;
     padding: $space-size $space-size * 1.75;
     border: none !important;
 
-    &:focus {
-      // background-color: ?
-      // color: ?
-    }
-
-    &:hover {
-      background-color: $divider !important;
+    &:hover &:focus {
+      background-color: alpha-composite($toggle-bg, $divider) !important;
     }
 
     &:active {
-      background-color: $track !important;
+      background-color: alpha-composite($toggle-bg, $track) !important;
     }
 
     &:checked {
-      background-color: $primary !important;
-      color: on($primary);
+      $toggle-bg: $primary;
 
-      &:focus {
-        // background-color: ?
-        // color: ?
-      }
+      background-color: alpha-composite($toggle-bg, $primary-fill) !important;
+      color: on($primary) !important;
 
-      &:hover {
-        background-color: mix($text, $primary, 10%) !important;
-        color: on($primary);
+      &:hover &:focus {
+        background-color: alpha-composite($toggle-bg, $primary-divider) !important;
       }
 
       &:active {
-        background-color: mix($text, $primary, 20%) !important;
-        color: on($primary);
+        background-color: alpha-composite($toggle-bg, $primary-track) !important;
       }
     }
 
@@ -132,12 +124,12 @@ $toggle-height: $space-size * 4 + $margin-size + $base-icon-size;
 
   .quick-toggle-separator {
     width: 1px;
-    // background-color: ?
+    background-color: $divider;
   }
 
   &:checked {
     .quick-toggle-separator {
-      // background-color: ?
+      background-color: $primary-divider;
     }
   }
 }

@@ -100,6 +100,29 @@
   }
 }
 
+@function alpha-composite($bg-color, $fg-color) {
+  $bg-r: red($bg-color);
+  $bg-g: green($bg-color);
+  $bg-b: blue($bg-color);
+  $bg-a: alpha($bg-color);
+
+  $fg-r: red($fg-color);
+  $fg-g: green($fg-color);
+  $fg-b: blue($fg-color);
+  $fg-a: alpha($fg-color);
+
+  $composite-a: $fg-a + $bg-a * (1 - $fg-a);
+  @if $composite-a == 0 {
+    @return rgba(0, 0, 0, 0);
+  }
+
+  $composite-r: ($fg-r * $fg-a + $bg-r * $bg-a * (1 - $fg-a)) / $composite-a;
+  $composite-g: ($fg-g * $fg-a + $bg-g * $bg-a * (1 - $fg-a)) / $composite-a;
+  $composite-b: ($fg-b * $fg-a + $bg-b * $bg-a * (1 - $fg-a)) / $composite-a;
+
+  @return rgba($composite-r, $composite-g, $composite-b, $composite-a);
+}
+
 //
 // Basic colors
 //
